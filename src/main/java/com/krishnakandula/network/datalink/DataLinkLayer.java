@@ -1,4 +1,4 @@
-package datalink;
+package com.krishnakandula.network.datalink;
 
 /**
  * Created by Krishna Chaitanya Kandula on 4/15/2018.

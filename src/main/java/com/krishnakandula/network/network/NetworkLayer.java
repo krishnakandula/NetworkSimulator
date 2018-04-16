@@ -1,4 +1,4 @@
-package network;
+package com.krishnakandula.network.network;
 
 /**
  * Created by Krishna Chaitanya Kandula on 4/15/2018.
