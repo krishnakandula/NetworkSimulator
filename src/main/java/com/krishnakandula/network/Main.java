@@ -1,10 +1,19 @@
+package com.krishnakandula.network;
+
+import com.krishnakandula.network.datalink.DataLinkLayer;
+import com.krishnakandula.network.datalink.DataLinkLayerImpl;
 import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws InterruptedException {
         Node node = parseInput(args);
         System.out.println(node);
+        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl();
+        for (int time = 0; time < node.lifeTime; time++) {
+            dataLinkLayer.receiveFromChannel();
+            Thread.sleep(1000);
+        }
     }
 
     private static Node parseInput(String... args) {

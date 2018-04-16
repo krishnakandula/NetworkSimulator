@@ -5,8 +5,6 @@ package datalink;
  */
 public class DataLinkLayerImpl implements DataLinkLayer {
 
-
-
     @Override
     public void receiveFromChannel() {
 
