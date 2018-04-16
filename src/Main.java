@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -17,18 +16,16 @@ public class Main {
         node.id = Integer.parseInt(args[0]);
         node.lifeTime = Integer.parseInt(args[1]);
         node.destination = Integer.parseInt(args[2]);
+        node.neighbors = new ArrayList<>();
 
         if (args.length > 3) {
-            List<Integer> neighbors = new ArrayList<>();
-            if (args.length == 4) {
-                neighbors.add(Integer.parseInt(args[3]));
-                node.neighbors = neighbors;
-            } else {
+            int neighbor = 3;
+            if (args[3].charAt(0) == '"') {
                 node.msg = args[3];
-                int neighbor = 4;
-                while (neighbor < args.length) {
-                    neighbors.add(Integer.parseInt(args[neighbor++]));
-                }
+                neighbor++;
+            }
+            while (neighbor < args.length) {
+                node.neighbors.add(Integer.parseInt(args[neighbor++]));
             }
         }
 

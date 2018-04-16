@@ -10,11 +10,17 @@ public class Node {
 
     @Override
     public String toString() {
-        return "id = " + id + "\n" +
-                "lifeTime = " + lifeTime + "\n" +
-                "destination = " + destination + "\n" +
-                "msg = " + msg + "\n" +
-                "neighbors = " + Arrays.toString(neighbors.toArray());
+        StringBuilder builder = new StringBuilder();
+        builder.append("id = ").append(id).append("\n");
+        builder.append("life = ").append(lifeTime).append("\n");
+        builder.append("destination = ").append(destination).append("\n");
+        if (msg != null) {
+            builder.append("msg = ").append(msg).append("\n");
+        }
+        if (neighbors != null && !neighbors.isEmpty()) {
+            builder.append("neighbors = ").append(Arrays.toString(neighbors.toArray()));
+        }
+        return builder.toString();
 
     }
 }
