@@ -7,15 +7,35 @@ import java.io.*;
  */
 public class Reader {
 
-    public String readFile(String filePath) {
+    private String filePath;
+    private int count;
+
+    public Reader(String filePath) {
+        this.filePath = filePath;
+        try {
+            File file = new File(filePath);
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.close();
+
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    public String readFile() {
         try {
             BufferedReader reader = openFile(filePath);
             if (reader != null) {
                 StringBuilder input = new StringBuilder();
                 String str;
+                int temp = 0;
                 while ((str = reader.readLine()) != null) {
-                    input.append(str);
+                    // new msg
+                    if (++temp > count) {
+                        input.append(str);
+                    }
                 }
+                count = temp;
                 return input.toString();
             } else {
                 return "";

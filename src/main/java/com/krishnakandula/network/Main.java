@@ -2,6 +2,9 @@ package com.krishnakandula.network;
 
 import com.krishnakandula.network.datalink.DataLinkLayer;
 import com.krishnakandula.network.datalink.DataLinkLayerImpl;
+import com.krishnakandula.network.network.NetworkLayer;
+import com.krishnakandula.network.network.NetworkLayerImpl;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -9,7 +12,10 @@ public class Main {
     public static void main(String... args) throws InterruptedException {
         Node node = parseInput(args);
         System.out.println(node);
-        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl();
+        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node);
+        NetworkLayer networkLayer = new NetworkLayerImpl();
+
+        dataLinkLayer.setNetworkLayer(networkLayer);
         for (int time = 0; time < node.lifeTime; time++) {
             dataLinkLayer.receiveFromChannel();
             Thread.sleep(1000);
