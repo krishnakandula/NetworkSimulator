@@ -8,4 +8,6 @@ public interface TransportLayer {
     void receiveFromNetwork(String msg);
 
     void outputAllReceived();
+
+    void setTime(int time);
 }

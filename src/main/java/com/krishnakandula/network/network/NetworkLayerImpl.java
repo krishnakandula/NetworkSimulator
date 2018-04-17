@@ -1,12 +1,14 @@
 package com.krishnakandula.network.network;
 
+import com.krishnakandula.network.datalink.DataFrame;
+
 /**
  * Created by Krishna Chaitanya Kandula on 4/16/2018.
  */
 public class NetworkLayerImpl implements NetworkLayer {
 
     @Override
-    public void receiveFromDataLinkLayer(String msg) {
+    public void receiveFromDataLinkLayer(DataFrame frame) {
 
     }
 

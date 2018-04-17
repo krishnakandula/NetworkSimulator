@@ -12,4 +12,6 @@ public interface DataLinkLayer {
     void receiveFromNetwork(String msg, int nextHop);
 
     void setNetworkLayer(NetworkLayer networkLayer);
+
+    void setTime(int time);
 }

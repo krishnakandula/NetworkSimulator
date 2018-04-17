@@ -17,6 +17,9 @@ public class Main {
 
         dataLinkLayer.setNetworkLayer(networkLayer);
         for (int time = 0; time < node.lifeTime; time++) {
+            //Update all times
+            dataLinkLayer.setTime(time);
+
             dataLinkLayer.receiveFromChannel();
             Thread.sleep(1000);
         }
