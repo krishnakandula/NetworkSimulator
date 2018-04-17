@@ -7,6 +7,7 @@ public class DataFrame {
     int seqNo;
     int channelNumber;
     String networkLayerMessage;
+    Integer timeSent = null;
 
     DataFrame(int seqNo, int channelNumber, String networkLayerMessage) {
         this.seqNo = seqNo;

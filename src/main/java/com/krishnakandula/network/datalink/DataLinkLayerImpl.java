@@ -15,16 +15,18 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     private Node node;
     private NetworkLayer networkLayer;
     private Map<Integer, Reader> readers;
-    private Map<Integer, String> msgs;              // NeighborId -> Msg
+    private Map<Integer, String> msgs;                  // NeighborId -> Msg
+    private Map<Integer, Channel> channels;             // NeighborId -> Channel
     private int seqNo = 0;
     private int time;
 
-    public DataLinkLayerImpl(Node node) {
+    public DataLinkLayerImpl(Node node, int numChannels) {
         this.node = node;
         msgs = new HashMap<>();
         //Init readers
         this.readers = new HashMap<>();
         node.neighbors.forEach(neighbor -> readers.put(neighbor, new Reader(getFilePath(neighbor))));
+        //TODO: Init channels
     }
 
     @Override
@@ -43,7 +45,9 @@ public class DataLinkLayerImpl implements DataLinkLayer {
             frames.stream()
                     .forEach(frame -> {
                         if (isAcknowledgment(frame)) {
-
+                            DataAck ack = DataAck.from(frame);
+                            Channel channel = channels.get(neighbor);
+                            channel.clearLogicalChannel(ack.seqNo);
                         } else {
                             DataFrame dataFrame = DataFrame.from(frame);
                             sendAck(dataFrame, neighbor);
@@ -61,6 +65,10 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     @Override
     public void setNetworkLayer(NetworkLayer networkLayer) {
         this.networkLayer = networkLayer;
+    }
+
+    private void sendData(DataFrame dataFrame) {
+
     }
 
     private void sendAck(DataFrame dataFrame, int neighborId) {
