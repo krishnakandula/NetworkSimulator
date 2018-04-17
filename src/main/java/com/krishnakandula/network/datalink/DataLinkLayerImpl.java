@@ -19,14 +19,21 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     private Map<Integer, Channel> channels;             // NeighborId -> Channel
     private int seqNo = 0;
     private int time;
+    private int timeout;
 
-    public DataLinkLayerImpl(Node node, int numChannels) {
+    public DataLinkLayerImpl(Node node, int numChannels, int timeout) {
         this.node = node;
+        this.timeout = timeout;
+
         msgs = new HashMap<>();
-        //Init readers
+
+        // Init readers
         this.readers = new HashMap<>();
         node.neighbors.forEach(neighbor -> readers.put(neighbor, new Reader(getFilePath(neighbor))));
-        //TODO: Init channels
+
+        // Init channels
+        this.channels = new HashMap<>();
+        node.neighbors.forEach(neighbor -> channels.put(neighbor, new Channel(numChannels)));
     }
 
     @Override
@@ -55,6 +62,8 @@ public class DataLinkLayerImpl implements DataLinkLayer {
                         }
                     });
         });
+
+        checkTimeouts();
     }
 
     @Override
@@ -67,8 +76,23 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         this.networkLayer = networkLayer;
     }
 
-    private void sendData(DataFrame dataFrame) {
+    private void checkTimeouts() {
+        channels.forEach((neighborId, channel) -> {
+           List<DataFrame> timedOut = channel.getTimedOutFrames(time - timeout);
+           timedOut.forEach(dataFrame -> channel.clearLogicalChannel(dataFrame.seqNo));
+           timedOut.forEach(dataFrame -> sendData(dataFrame, neighborId));
+        });
+    }
 
+    private void sendData(DataFrame dataFrame, int neighborId) {
+        Integer clearChannel = channels.get(neighborId).getClearLogicalChannel();
+        if (clearChannel != null) {
+            dataFrame.channelNumber = clearChannel;
+            channels.get(neighborId).addToLogicalChannel(dataFrame);
+            Writer.writeFile(getFilePath(neighborId), dataFrame.toString());
+        } else {
+            // Drop the frame, transport layer will resend
+        }
     }
 
     private void sendAck(DataFrame dataFrame, int neighborId) {
