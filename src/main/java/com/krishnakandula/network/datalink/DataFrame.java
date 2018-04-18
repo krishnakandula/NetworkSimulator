@@ -1,5 +1,8 @@
 package com.krishnakandula.network.datalink;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Krishna Chaitanya Kandula on 4/16/2018.
  */
@@ -15,11 +18,14 @@ public class DataFrame {
     }
 
     public static DataFrame from(String frame) {
-        //Remove starting F and E
-        frame = frame.substring(1, frame.length() - 1);
-        String unstuffedMsg = unstuffMessage(frame.substring(9));
-        int channelNum = Integer.parseInt(frame.substring(5, 6));
-        int seqNo = Integer.parseInt(frame.substring(7, 8));
+        String regex = "Fdata (\\d+) (\\d+) (.*)E$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(frame);
+
+        m.find();
+        int channelNum = Integer.parseInt(m.group(1));
+        int seqNo = Integer.parseInt(m.group(2));
+        String unstuffedMsg = unstuffMessage(m.group(3));
 
         DataFrame dataFrame = new DataFrame(seqNo, unstuffedMsg);
         dataFrame.channelNumber = channelNum;

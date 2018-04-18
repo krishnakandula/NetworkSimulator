@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="95531108-30d5-4a70-ac4b-d0682cd087a6" name="Default" comment="Fix acknowledgements sending out data frames">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataFrame.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataFrame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataFrameTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataFrameTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,18 +20,20 @@
       <file leaf-file-name="DataFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="79">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataLinkLayerImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataLinkLayerImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="121" column="4" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+            <state relative-caret-position="795">
+              <caret line="72" column="21" lean-forward="true" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -39,8 +42,8 @@
       <file leaf-file-name="DataFrameTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataFrameTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="144">
+              <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -49,8 +52,30 @@
       <file leaf-file-name="DataAck.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="from2to5" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/from2to5">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="from5to2" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/from5to2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -111,15 +136,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/Channel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java" />
         <option value="$PROJECT_DIR$/from5to2" />
         <option value="$PROJECT_DIR$/from2to5" />
         <option value="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataLinkLayerImplTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/ReaderTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataFrame.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataFrameTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java" />
       </list>
     </option>
   </component>
@@ -236,9 +261,10 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -264,7 +290,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DataFrameTest.testToString">
+  <component name="RunManager" selected="Multirun.RunNetwork">
     <configuration name="DataFrameTest.testToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -425,8 +451,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.DataFrameTest.testToString" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.DataFrameTest.testToString" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.ReaderTest.testReadFile" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.DataLinkLayerImplTest.sendData" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.WriterTest.testWriteFile" />
@@ -450,26 +476,19 @@
       <workItem from="1523983341245" duration="4458000" />
       <workItem from="1523989785676" duration="79000" />
       <workItem from="1523990004338" duration="5876000" />
-      <workItem from="1524011333959" duration="5259000" />
+      <workItem from="1524011333959" duration="6653000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix acknowledgements sending out data frames">
+      <created>1524022345200</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1524022345201</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 20h 23m 21s.xml">
-      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 20h 23m 32s.xml">
-      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 20h 29m 37s.xml">
-      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 20h 30m 25s.xml">
-      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 20h 30m 45s.xml">
-      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DataFrameTest_testToString - 2018.04.17 at 20h 31m 36s.xml">
       <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
     </history-entry>
@@ -485,20 +504,36 @@
     <history-entry file="DataFrameTest_testToString - 2018.04.17 at 22h 25m 07s.xml">
       <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 22h 42m 59s.xml">
+      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 22h 43m 44s.xml">
+      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 22h 43m 58s.xml">
+      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 22h 45m 36s.xml">
+      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataFrameTest_testToString - 2018.04.17 at 22h 46m 04s.xml">
+      <configuration name="DataFrameTest.testToString" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44940000" />
+    <option name="totallyTimeSpent" value="46334000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29764706" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2974607" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22246066" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -598,12 +633,6 @@
           <line>15</line>
           <properties />
           <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java</url>
-          <line>55</line>
-          <properties />
-          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="51" />
@@ -768,14 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/from5to2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/from2to1">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -808,11 +829,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataLinkLayerImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="21" column="56" lean-forward="false" selection-start-line="21" selection-start-column="56" selection-end-line="21" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="72" column="21" lean-forward="true" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataFrameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="79">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -824,34 +881,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataAck.java">
+    <entry file="file://$PROJECT_DIR$/from5to2">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataFrameTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataLinkLayerImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="56" lean-forward="false" selection-start-line="21" selection-start-column="56" selection-end-line="21" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="121" column="4" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

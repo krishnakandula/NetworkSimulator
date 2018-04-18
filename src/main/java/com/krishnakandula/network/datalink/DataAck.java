@@ -1,5 +1,8 @@
 package com.krishnakandula.network.datalink;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Krishna Chaitanya Kandula on 4/17/2018.
  */
@@ -12,9 +15,13 @@ public class DataAck {
     }
 
     public static DataAck from(String frame) {
-        frame = frame.substring(1, frame.length() - 1);
-        int channelNum = Integer.parseInt(frame.substring(4, 5));
-        int seqNo = Integer.parseInt(frame.substring(6, 7));
+        String regex = "Fack (\\d+) (\\d+)E$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(frame);
+        m.find();
+
+        int channelNum = Integer.parseInt(m.group(1));
+        int seqNo = Integer.parseInt(m.group(2));
         return new DataAck(seqNo);
     }
 
