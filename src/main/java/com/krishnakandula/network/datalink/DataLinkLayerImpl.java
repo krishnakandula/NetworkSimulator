@@ -1,8 +1,8 @@
 package com.krishnakandula.network.datalink;
 
 import com.krishnakandula.network.Node;
-import com.krishnakandula.network.Reader;
-import com.krishnakandula.network.Writer;
+import com.krishnakandula.network.util.Reader;
+import com.krishnakandula.network.util.Writer;
 import com.krishnakandula.network.network.NetworkLayer;
 
 import java.util.*;
@@ -61,7 +61,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
                     } else {
                         DataFrame dataFrame = DataFrame.from(frame);
                         sendAck(dataFrame, neighbor);
-                        networkLayer.receiveFromDataLinkLayer(dataFrame);
+                        networkLayer.receiveFromDataLinkLayer(dataFrame.networkLayerMessage);
                     }
                 });
             }
@@ -77,7 +77,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     }
 
     @Override
-    public void setNetworkLayer(NetworkLayer networkLayer) {
+    public void provideNetworkLayer(NetworkLayer networkLayer) {
         this.networkLayer = networkLayer;
     }
 

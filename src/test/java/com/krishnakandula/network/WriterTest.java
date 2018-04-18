@@ -1,8 +1,7 @@
 package com.krishnakandula.network;
 
+import com.krishnakandula.network.util.Writer;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Krishna Chaitanya Kandula on 4/16/2018.

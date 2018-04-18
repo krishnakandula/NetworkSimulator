@@ -12,9 +12,10 @@ public class Main {
     public static void main(String... args) throws InterruptedException {
         Node node = parseInput(args);
         DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node, 2, 5);
-        NetworkLayer networkLayer = new NetworkLayerImpl();
+        NetworkLayer networkLayer = new NetworkLayerImpl(node);
 
-        dataLinkLayer.setNetworkLayer(networkLayer);
+        dataLinkLayer.provideNetworkLayer(networkLayer);
+        networkLayer.provideDataLinkLayer(dataLinkLayer);
         for (int time = 0; time < node.lifeTime; time++) {
             //Update all times
             dataLinkLayer.setTime(time);

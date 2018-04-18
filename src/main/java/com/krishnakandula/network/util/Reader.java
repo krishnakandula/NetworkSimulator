@@ -1,4 +1,4 @@
-package com.krishnakandula.network;
+package com.krishnakandula.network.util;
 
 import java.io.*;
 
