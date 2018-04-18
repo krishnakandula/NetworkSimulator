@@ -11,8 +11,7 @@ public class Main {
 
     public static void main(String... args) throws InterruptedException {
         Node node = parseInput(args);
-        System.out.println(node);
-        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node);
+        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node, 2, 5);
         NetworkLayer networkLayer = new NetworkLayerImpl();
 
         dataLinkLayer.setNetworkLayer(networkLayer);
@@ -21,6 +20,7 @@ public class Main {
             dataLinkLayer.setTime(time);
 
             dataLinkLayer.receiveFromChannel();
+            dataLinkLayer.receiveFromNetwork(node.msg, node.destination);
             Thread.sleep(1000);
         }
     }

@@ -11,8 +11,9 @@ public class ReaderTest {
 
     @Test
     public void testReadFile() {
-        Reader reader = new Reader("test");
-        System.out.println(reader.readFile());
+        Reader reader = new Reader("from2to1");
+        String read = reader.readFile();
+        System.out.println(read);
     }
 
 }
