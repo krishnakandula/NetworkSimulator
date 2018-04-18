@@ -52,18 +52,17 @@ public class DataLinkLayerImpl implements DataLinkLayer {
             if (!frames.isEmpty()) {
                 msgs.put(neighbor, frames.get(frames.size() - 1));
                 frames.remove(frames.size() - 1);
-                frames.stream()
-                        .forEach(frame -> {
-                            if (isAcknowledgment(frame)) {
-                                DataAck ack = DataAck.from(frame);
-                                Channel channel = channels.get(neighbor);
-                                channel.clearLogicalChannel(ack.seqNo);
-                            } else {
-                                DataFrame dataFrame = DataFrame.from(frame);
-                                sendAck(dataFrame, neighbor);
-                                networkLayer.receiveFromDataLinkLayer(dataFrame);
-                            }
-                        });
+                frames.forEach(frame -> {
+                    if (isAcknowledgment(frame)) {
+                        DataAck ack = DataAck.from(frame);
+                        Channel channel = channels.get(neighbor);
+                        channel.clearLogicalChannel(ack.seqNo);
+                    } else {
+                        DataFrame dataFrame = DataFrame.from(frame);
+                        sendAck(dataFrame, neighbor);
+                        networkLayer.receiveFromDataLinkLayer(dataFrame);
+                    }
+                });
             }
         });
 
@@ -89,7 +88,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         });
     }
 
-    protected void sendData(DataFrame dataFrame, int neighborId) {
+    void sendData(DataFrame dataFrame, int neighborId) {
         Integer clearChannel = channels.get(neighborId).getClearLogicalChannel();
         if (clearChannel != null) {
             dataFrame.channelNumber = clearChannel;
@@ -102,8 +101,10 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     }
 
     private void sendAck(DataFrame dataFrame, int neighborId) {
-        System.out.println("Sending ack: " + dataFrame);
-        Writer.writeFile(getWriteFilePath(neighborId), dataFrame.toString());
+        DataAck ack = new DataAck(dataFrame.seqNo);
+        ack.channelNumber = dataFrame.channelNumber;
+        System.out.println("Sending ack: " + ack);
+        Writer.writeFile(getWriteFilePath(neighborId), ack.toString());
     }
 
     private boolean isAcknowledgment(String frame) {
@@ -118,7 +119,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
      * @return A list containing all the frames. The last element of the list will
      * contain the remainder of the message
      */
-    protected List<String> getFrames(String msg) {
+    private List<String> getFrames(String msg) {
         List<String> frames = new ArrayList<>();
         Stack<Integer> s = new Stack<>();
         int index = 0;
