@@ -22,7 +22,10 @@ public class DataAck {
 
         int channelNum = Integer.parseInt(m.group(1));
         int seqNo = Integer.parseInt(m.group(2));
-        return new DataAck(seqNo);
+        DataAck ack = new DataAck(seqNo);
+        ack.channelNumber = channelNum;
+
+        return ack;
     }
 
     @Override

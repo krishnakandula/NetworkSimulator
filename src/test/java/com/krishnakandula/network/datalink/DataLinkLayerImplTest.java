@@ -1,7 +1,7 @@
 package com.krishnakandula.network.datalink;
 
 import com.krishnakandula.network.Node;
-import com.sun.tools.javac.util.List;
+import java.util.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +11,9 @@ public class DataLinkLayerImplTest {
     @Test
     public void sendData() throws Exception {
         Node node = new Node();
-        node.neighbors = List.of(1);
+        List<Integer> neighborsList = new ArrayList<>();
+        neighborsList.add(1);
+        node.neighbors = neighborsList;
         node.id = 2;
         node.msg = "Testing";
         node.destination = 1;

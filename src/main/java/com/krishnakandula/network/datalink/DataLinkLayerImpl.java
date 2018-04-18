@@ -57,6 +57,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
                         DataAck ack = DataAck.from(frame);
                         Channel channel = channels.get(neighbor);
                         channel.clearLogicalChannel(ack.seqNo);
+                        System.out.println(String.format("Received ack: %s from neighbor %d", ack, neighbor));
                     } else {
                         DataFrame dataFrame = DataFrame.from(frame);
                         sendAck(dataFrame, neighbor);
@@ -93,7 +94,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         if (clearChannel != null) {
             dataFrame.channelNumber = clearChannel;
             channels.get(neighborId).addToLogicalChannel(dataFrame);
-            System.out.println("Sending data: " + dataFrame);
+            System.out.println(String.format("Sending data: %s to %d", dataFrame, neighborId));
             Writer.writeFile(getWriteFilePath(neighborId), dataFrame.toString());
         } else {
             // Drop the frame, transport layer will resend
@@ -103,7 +104,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     private void sendAck(DataFrame dataFrame, int neighborId) {
         DataAck ack = new DataAck(dataFrame.seqNo);
         ack.channelNumber = dataFrame.channelNumber;
-        System.out.println("Sending ack: " + ack);
+        System.out.println(String.format("Sending ack: %s to %d", ack, neighborId));
         Writer.writeFile(getWriteFilePath(neighborId), ack.toString());
     }
 
