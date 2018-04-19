@@ -9,7 +9,7 @@ public interface DataLinkLayer {
 
     void receiveFromChannel();
 
-    void receiveFromNetwork(String msg, int nextHop);
+    void receiveFromNetwork(String msg, byte nextHop);
 
     void provideNetworkLayer(NetworkLayer networkLayer);
 

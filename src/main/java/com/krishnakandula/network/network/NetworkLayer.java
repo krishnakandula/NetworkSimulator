@@ -10,7 +10,7 @@ public interface NetworkLayer {
 
     void receiveFromDataLinkLayer(String msg);
 
-    void receiveFromTransportLayer(String msg);
+    void receiveFromTransportLayer(String transportMsg, byte length, byte destination);
 
     void provideDataLinkLayer(DataLinkLayer dataLinkLayer);
 

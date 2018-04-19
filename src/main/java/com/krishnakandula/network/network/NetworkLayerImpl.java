@@ -16,11 +16,11 @@ public class NetworkLayerImpl implements NetworkLayer {
     private DataLinkLayer dataLinkLayer;
     private TransportLayer transportLayer;
     private Map<Byte, Short> greatestReceivedMsgs;     //NeighborId -> largestReceivedMessage
+    private short msgId = 0;
 
     public NetworkLayerImpl(Node n) {
         this.node = n;
 
-        //Init greatestReceivedMsgs
         greatestReceivedMsgs = new HashMap<>();
         node.neighbors.forEach(neighborId -> greatestReceivedMsgs.put(neighborId.byteValue(), Short.MIN_VALUE));
     }
@@ -41,8 +41,9 @@ public class NetworkLayerImpl implements NetworkLayer {
     }
 
     @Override
-    public void receiveFromTransportLayer(String msg) {
-
+    public void receiveFromTransportLayer(String msg, byte length, byte destination) {
+        NetworkMsg networkMsg = new NetworkMsg(node.id, destination, ++msgId, length, msg);
+        dataLinkLayer.receiveFromNetwork(networkMsg.toString(), destination);
     }
 
     @Override

@@ -14,9 +14,9 @@ public class DataLinkLayerImpl implements DataLinkLayer {
 
     private Node node;
     private NetworkLayer networkLayer;
-    private Map<Integer, Reader> readers;
-    private Map<Integer, String> msgs;                  // NeighborId -> Msg
-    private Map<Integer, Channel> channels;             // NeighborId -> Channel
+    private Map<Byte, Reader> readers;
+    private Map<Byte, String> msgs;                  // NeighborId -> Msg
+    private Map<Byte, Channel> channels;             // NeighborId -> Channel
     private int seqNo = 0;
     private int time;
     private int timeout;
@@ -26,7 +26,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         this.timeout = timeout;
 
         // Init msgs with empty strings
-        msgs = new HashMap<>();
+        msgs = new HashMap<Byte, String>();
         node.neighbors.forEach(neighbor -> msgs.put(neighbor, ""));
 
         // Init readers
@@ -40,7 +40,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
 
     @Override
     public void receiveFromChannel() {
-        for (Integer neighbor : node.neighbors) {
+        for (Byte neighbor : node.neighbors) {
             String msg = msgs.get(neighbor).concat(readers.get(neighbor).readFile());
             msgs.put(neighbor, msg);
         }
@@ -71,7 +71,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     }
 
     @Override
-    public void receiveFromNetwork(String msg, int nextHop) {
+    public void receiveFromNetwork(String msg, byte nextHop) {
         DataFrame dataFrame = new DataFrame(++seqNo, msg);
         sendData(dataFrame, nextHop);
     }

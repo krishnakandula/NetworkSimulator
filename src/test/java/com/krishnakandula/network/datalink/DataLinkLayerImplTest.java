@@ -4,15 +4,13 @@ import com.krishnakandula.network.Node;
 import java.util.*;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class DataLinkLayerImplTest {
 
     @Test
     public void sendData() throws Exception {
         Node node = new Node();
-        List<Integer> neighborsList = new ArrayList<>();
-        neighborsList.add(1);
+        List<Byte> neighborsList = new ArrayList<>();
+        neighborsList.add((byte) 1);
         node.neighbors = neighborsList;
         node.id = 2;
         node.msg = "Testing";

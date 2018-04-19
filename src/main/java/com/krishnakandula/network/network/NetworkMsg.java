@@ -36,4 +36,9 @@ public class NetworkMsg {
 
         return new NetworkMsg(sourceId, destinationId, messaegid, length, transportMsg);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d %d %d %d %s", sourceId, destinationId, messageId, length, transportMsg);
+    }
 }

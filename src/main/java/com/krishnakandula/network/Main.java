@@ -32,9 +32,9 @@ public class Main {
         }
 
         Node node = new Node();
-        node.id = Integer.parseInt(args[0]);
+        node.id = Byte.parseByte(args[0]);
         node.lifeTime = Integer.parseInt(args[1]);
-        node.destination = Integer.parseInt(args[2]);
+        node.destination = Byte.parseByte(args[2]);
         node.neighbors = new ArrayList<>();
 
         if (args.length > 3) {
@@ -44,7 +44,7 @@ public class Main {
                 neighbor++;
             }
             while (neighbor < args.length) {
-                node.neighbors.add(Integer.parseInt(args[neighbor++]));
+                node.neighbors.add(Byte.parseByte(args[neighbor++]));
             }
         }
 

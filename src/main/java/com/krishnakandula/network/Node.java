@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Node {
-    public int id;
+    public byte id;
     public int lifeTime;
-    public int destination;
+    public byte destination;
     public String msg;
-    public List<Integer> neighbors;
+    public List<Byte> neighbors;
 
     @Override
     public String toString() {
