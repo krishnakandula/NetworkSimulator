@@ -4,6 +4,8 @@ import com.krishnakandula.network.datalink.DataLinkLayer;
 import com.krishnakandula.network.datalink.DataLinkLayerImpl;
 import com.krishnakandula.network.network.NetworkLayer;
 import com.krishnakandula.network.network.NetworkLayerImpl;
+import com.krishnakandula.network.transport.TransportLayer;
+import com.krishnakandula.network.transport.TransportLayerImpl;
 
 import java.util.ArrayList;
 
@@ -13,15 +15,25 @@ public class Main {
         Node node = parseInput(args);
         DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node, 2, 5);
         NetworkLayer networkLayer = new NetworkLayerImpl(node);
+        TransportLayer transportLayer = new TransportLayerImpl(
+                node,
+                20,
+                3,
+                (short) 5);
 
         dataLinkLayer.provideNetworkLayer(networkLayer);
         networkLayer.provideDataLinkLayer(dataLinkLayer);
+        networkLayer.provideTransportLayer(transportLayer);
+        transportLayer.provideNetworkLayer(networkLayer);
+
         for (int time = 0; time < node.lifeTime; time++) {
             //Update all times
             dataLinkLayer.setTime(time);
+            transportLayer.setTime(time);
 
             dataLinkLayer.receiveFromChannel();
-            dataLinkLayer.receiveFromNetwork(node.msg, node.destination);
+            transportLayer.sendMsg(node.msg, node.destination);
+
             Thread.sleep(1000);
         }
     }
