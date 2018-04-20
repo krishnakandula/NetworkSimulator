@@ -7,7 +7,7 @@ import com.krishnakandula.network.network.NetworkLayer;
  */
 public interface TransportLayer {
 
-    void sendMsg(String msg, byte destination);
+    void sendMsg();
 
     void receiveFromNetwork(String msg);
 

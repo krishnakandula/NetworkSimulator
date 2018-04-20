@@ -40,27 +40,21 @@ public class TransportLayerImpl implements TransportLayer {
             msgQueues.put(nodeId, new LinkedList<>());
             sentMsgs.put(nodeId, new ArrayList<>());
         });
+
+        // Split msg up and add to queue
+        splitMessage(node.msg, maxMsgSize).forEach(splitMsg -> {
+            TransportDataMsg dataMsg = new TransportDataMsg(
+                    node.id,
+                    node.destination,
+                    sequenceNum++,
+                    splitMsg,
+                    maxMsgSize);
+            msgQueues.get(node.destination).offer(dataMsg);
+        });
     }
 
     @Override
-    public void sendMsg(String msg, byte destination) {
-        if (!networkNodes.contains(destination)) {
-            networkNodes.add(destination);
-            msgQueues.put(destination, new LinkedList<>());
-            sentMsgs.put(destination, new ArrayList<>());
-        }
-
-        if (msg != null) {
-            splitMessage(msg, maxMsgSize).forEach(splitMsg -> {
-                TransportDataMsg dataMsg = new TransportDataMsg(
-                        node.id,
-                        destination,
-                        sequenceNum++,
-                        splitMsg,
-                        maxMsgSize);
-                msgQueues.get(destination).offer(dataMsg);
-            });
-        }
+    public void sendMsg() {
 
         // Check if window is open for each network node and send
         networkNodes.forEach(nodeId -> {

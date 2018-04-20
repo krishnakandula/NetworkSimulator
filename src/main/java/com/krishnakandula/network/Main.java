@@ -13,7 +13,9 @@ public class Main {
 
     public static void main(String... args) throws InterruptedException {
         Node node = parseInput(args);
-        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node, 2, 5);
+        DataLinkLayer dataLinkLayer = new DataLinkLayerImpl(node,
+                2,
+                5);
         NetworkLayer networkLayer = new NetworkLayerImpl(node);
         TransportLayer transportLayer = new TransportLayerImpl(
                 node,
@@ -27,15 +29,17 @@ public class Main {
         transportLayer.provideNetworkLayer(networkLayer);
 
         for (int time = 0; time < node.lifeTime; time++) {
-            //Update all times
+            //Update times
             dataLinkLayer.setTime(time);
             transportLayer.setTime(time);
 
             dataLinkLayer.receiveFromChannel();
-            transportLayer.sendMsg(node.msg, node.destination);
+            transportLayer.sendMsg();
 
             Thread.sleep(1000);
         }
+
+        transportLayer.outputAllReceived();
     }
 
     private static Node parseInput(String... args) {
