@@ -5,4 +5,6 @@ abstract class TransportMsg {
     byte sourceId;
     byte destinationId;
     short sequenceNum;
+
+    abstract byte getLength();
 }

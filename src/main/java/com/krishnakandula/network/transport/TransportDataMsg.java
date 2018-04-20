@@ -24,8 +24,9 @@ class TransportDataMsg extends TransportMsg {
         this.maxMsgSize = maxMsgSize;
     }
 
+    @Override
     byte getLength() {
-        return (byte) (maxMsgSize + data.length());
+        return (byte) (5 + data.length());
     }
 
     static TransportDataMsg from(String msg, short maxMsgSize) {

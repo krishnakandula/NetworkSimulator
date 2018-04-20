@@ -3,6 +3,7 @@ package com.krishnakandula.network.transport;
 import com.krishnakandula.network.Node;
 import com.krishnakandula.network.network.NetworkLayer;
 import com.krishnakandula.network.util.Pair;
+import com.krishnakandula.network.util.Writer;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class TransportLayerImpl implements TransportLayer {
     private Set<Byte> networkNodes;
     private Map<Byte, Queue<TransportDataMsg>> msgQueues;               // NodeId -> Queue of transport data msgs
     private Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs;  // NodeId -> List of sent data msgs
+    private Map<Byte, List<TransportDataMsg>> receivedMsgs;                       // NodeId -> List of received msgs
 
     public TransportLayerImpl(Node node, int timeOut, int windowSize, short maxMsgSize) {
         this.node = node;
@@ -64,23 +66,53 @@ public class TransportLayerImpl implements TransportLayer {
         networkNodes.forEach(nodeId -> {
             if (sentMsgs.get(nodeId).size() <= windowSize && !msgQueues.get(nodeId).isEmpty()) {
                 TransportDataMsg dataMsg = msgQueues.get(nodeId).poll();
-                sendMsgToNetworkLayer(dataMsg, sentMsgs, time, nodeId);
+                sendDataToNetworkLayer(dataMsg, sentMsgs, time, nodeId);
             }
         });
 
         // Check timed out msgs and resend
         List<TransportDataMsg> timedOutMsgs = getTimedOutMessages(sentMsgs, time, timeOut);
-        timedOutMsgs.forEach(timedOutMsg -> sendMsgToNetworkLayer(timedOutMsg, sentMsgs, time, timedOutMsg.destinationId));
+        timedOutMsgs.forEach(timedOutMsg -> sendDataToNetworkLayer(timedOutMsg, sentMsgs, time, timedOutMsg.destinationId));
     }
 
     @Override
     public void receiveFromNetwork(String msg) {
+        if (msg.charAt(0) == 'a') {
+            // Acknowledgement
+            TransportAckMsg ack = TransportAckMsg.from(msg);
 
+            // Remove datamsg from sentMsgs
+            if (sentMsgs.containsKey(ack.sourceId)) {
+                sentMsgs.put(ack.sourceId, sentMsgs.get(ack.sourceId).stream()
+                        .filter(nodeDataPair -> nodeDataPair.getValue().sequenceNum != ack.sequenceNum)
+                        .collect(Collectors.toList()));
+            }
+        } else {
+            // Data msg
+            TransportDataMsg data = TransportDataMsg.from(msg, maxMsgSize);
+
+            if (!networkNodes.contains(data.sourceId)) {
+                networkNodes.add(data.sourceId);
+                receivedMsgs.put(data.sourceId, new ArrayList<>());
+                msgQueues.put(data.sourceId, new LinkedList<>());
+            }
+
+            receivedMsgs.get(data.sourceId).add(data);
+
+            //Send ack
+            TransportAckMsg ack = new TransportAckMsg(node.id, data.sourceId, sequenceNum++);
+            networkLayer.receiveFromTransportLayer(ack.toString(), ack.getLength(), ack.destinationId);
+        }
     }
 
     @Override
     public void outputAllReceived() {
-
+        receivedMsgs.entrySet().stream()
+                .filter(nodeMsgsPair -> !nodeMsgsPair.getValue().isEmpty())
+                .forEach(nodeMsgsPair -> {
+                    nodeMsgsPair.getValue()
+                            .forEach(msg -> Writer.writeFile(getOutputFilePath(nodeMsgsPair.getKey()), msg.toString()));
+                });
     }
 
     @Override
@@ -120,10 +152,10 @@ public class TransportLayerImpl implements TransportLayer {
         return timedOutMsgs;
     }
 
-    private void sendMsgToNetworkLayer(TransportDataMsg dataMsg,
-                                       Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs,
-                                       int currentTime,
-                                       byte destination) {
+    private void sendDataToNetworkLayer(TransportDataMsg dataMsg,
+                                        Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs,
+                                        int currentTime,
+                                        byte destination) {
 
         if (!sentMsgs.containsKey(destination)) {
             sentMsgs.put(destination, new ArrayList<>());
