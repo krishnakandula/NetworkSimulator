@@ -16,8 +16,9 @@ public class TransportLayerImpl implements TransportLayer {
     private int windowSize;
     private short maxMsgSize;
     private short sequenceNum = 0;
-    private Map<Byte, Queue<TransportDataMsg>> msgQueues;                // NeighborId -> Queue of transport data msgs
-    private Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs;  // NeighborId -> List of sent data msgs
+    private Set<Byte> networkNodes;
+    private Map<Byte, Queue<TransportDataMsg>> msgQueues;               // NodeId -> Queue of transport data msgs
+    private Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs;  // NodeId -> List of sent data msgs
 
     public TransportLayerImpl(Node node, int timeOut, int windowSize, short maxMsgSize) {
         this.node = node;
@@ -25,38 +26,51 @@ public class TransportLayerImpl implements TransportLayer {
         this.windowSize = windowSize;
         this.maxMsgSize = maxMsgSize;
 
+        networkNodes = new HashSet<>();
         msgQueues = new HashMap<>();
         sentMsgs = new HashMap<>();
 
-        node.neighbors.forEach(neighborId -> {
-            msgQueues.put(neighborId, new LinkedList<>());
-            sentMsgs.put(neighborId, new ArrayList<>());
+        node.neighbors.stream()
+                .filter(neighborId -> neighborId != node.id)
+                .forEach(neighborId -> networkNodes.add(neighborId));
+
+        networkNodes.forEach(nodeId -> {
+            msgQueues.put(nodeId, new LinkedList<>());
+            sentMsgs.put(nodeId, new ArrayList<>());
         });
     }
 
     @Override
     public void sendMsg(String msg, byte destination) {
+        if (!networkNodes.contains(destination)) {
+            networkNodes.add(destination);
+            msgQueues.put(destination, new LinkedList<>());
+            sentMsgs.put(destination, new ArrayList<>());
+        }
+
         if (msg != null) {
             splitMessage(msg, maxMsgSize).forEach(splitMsg -> {
                 TransportDataMsg dataMsg = new TransportDataMsg(
                         node.id,
                         destination,
                         sequenceNum++,
-                        splitMsg);
+                        splitMsg,
+                        maxMsgSize);
                 msgQueues.get(destination).offer(dataMsg);
             });
         }
 
-        node.neighbors.forEach(neighborId -> {
-            if (sentMsgs.get(neighborId).size() <= windowSize && !msgQueues.get(neighborId).isEmpty()) {
-                TransportDataMsg dataMsg = msgQueues.get(neighborId).poll();
-                sendMsg(dataMsg, sentMsgs, time, neighborId);
+        // Check if window is open for each network node and send
+        networkNodes.forEach(nodeId -> {
+            if (sentMsgs.get(nodeId).size() <= windowSize && !msgQueues.get(nodeId).isEmpty()) {
+                TransportDataMsg dataMsg = msgQueues.get(nodeId).poll();
+                sendMsgToNetworkLayer(dataMsg, sentMsgs, time, nodeId);
             }
         });
 
         // Check timed out msgs and resend
         List<TransportDataMsg> timedOutMsgs = getTimedOutMessages(sentMsgs, time, timeOut);
-        timedOutMsgs.forEach(timedOutMsg -> sendMsg(timedOutMsg, sentMsgs, time, timedOutMsg.destinationId));
+        timedOutMsgs.forEach(timedOutMsg -> sendMsgToNetworkLayer(timedOutMsg, sentMsgs, time, timedOutMsg.destinationId));
     }
 
     @Override
@@ -97,21 +111,23 @@ public class TransportLayerImpl implements TransportLayer {
                                                        int timeOut) {
         int latestMsg = currentTime - timeOut;
         List<TransportDataMsg> timedOutMsgs = new ArrayList<>();
-        sentMsgs.forEach((neighbor, msgs) -> {
-            msgs.forEach(timeMsgPair -> {
-                if (latestMsg > timeMsgPair.getKey()) {
-                    timedOutMsgs.add(timeMsgPair.getValue());
-                }
-            });
-        });
+        sentMsgs.forEach((neighbor, msgs) -> msgs.forEach(timeMsgPair -> {
+            if (latestMsg > timeMsgPair.getKey()) {
+                timedOutMsgs.add(timeMsgPair.getValue());
+            }
+        }));
 
         return timedOutMsgs;
     }
 
-    private void sendMsg(TransportDataMsg dataMsg,
-                         Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs,
-                         int currentTime,
-                         byte destination) {
+    private void sendMsgToNetworkLayer(TransportDataMsg dataMsg,
+                                       Map<Byte, List<Pair<Integer, TransportDataMsg>>> sentMsgs,
+                                       int currentTime,
+                                       byte destination) {
+
+        if (!sentMsgs.containsKey(destination)) {
+            sentMsgs.put(destination, new ArrayList<>());
+        }
 
         // Remove previously sent messages with same sequence id in sent msgs
         removeMsgFromSentMsgs(destination, dataMsg.sequenceNum, sentMsgs);
@@ -126,4 +142,9 @@ public class TransportLayerImpl implements TransportLayer {
                 .filter(timeDataPair -> timeDataPair.getValue().sequenceNum != sequenceNum)
                 .collect(Collectors.toList()));
     }
+
+    private static String getOutputFilePath(byte nodeId) {
+        return String.format("node%dreceived", nodeId);
+    }
+
 }

@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95531108-30d5-4a70-ac4b-d0682cd087a6" name="Default" comment="Fix acknowledgements sending out data frames">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportAckMsg.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportMsg.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/util/Pair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayer.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,26 +25,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransportLayerImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TransportLayerImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="324">
+              <caret line="128" column="57" lean-forward="false" selection-start-line="128" selection-start-column="57" selection-end-line="128" selection-end-column="57" />
               <folding>
+                <element signature="method#sendMsg#0;class#TransportLayerImpl#0" expanded="false" />
                 <element signature="method#splitMessage#0;class#TransportLayerImpl#0" expanded="false" />
                 <element signature="method#getTimedOutMessages#0;class#TransportLayerImpl#0" expanded="false" />
-                <element signature="method#sendMsg#1;class#TransportLayerImpl#0" expanded="false" />
                 <element signature="method#removeMsgFromSentMsgs#0;class#TransportLayerImpl#0" expanded="false" />
+                <element signature="e#5446#5447#0" expanded="true" />
+                <element signature="e#5508#5509#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataLinkLayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="144">
+              <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -71,12 +77,12 @@
       <file leaf-file-name="TransportDataMsg.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+            <state relative-caret-position="169">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#645#646#0" expanded="true" />
-                <element signature="e#694#695#0" expanded="true" />
+                <element signature="e#854#855#0" expanded="true" />
+                <element signature="e#912#913#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,7 +147,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/util/Writer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Node.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/network/NetworkMsg.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/network/NetworkMsgTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/krishnakandula/network/datalink/DataLinkLayerImplTest.java" />
@@ -151,9 +156,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportAckMsg.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/network/NetworkLayerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/network/NetworkLayer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java" />
       </list>
     </option>
   </component>
@@ -502,7 +508,7 @@
       <workItem from="1523989785676" duration="79000" />
       <workItem from="1523990004338" duration="5876000" />
       <workItem from="1524011333959" duration="6653000" />
-      <workItem from="1524151349057" duration="8750000" />
+      <workItem from="1524151349057" duration="11120000" />
     </task>
     <task id="LOCAL-00001" summary="Fix acknowledgements sending out data frames">
       <created>1524022345200</created>
@@ -547,7 +553,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62645000" />
+    <option name="totallyTimeSpent" value="65015000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -561,7 +567,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22174536" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22174536" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -804,14 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="30" lean-forward="false" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/network/NetworkMsg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -854,32 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1476">
-          <caret line="89" column="5" lean-forward="false" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportAckMsg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/network/NetworkLayerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
@@ -896,6 +868,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#854#855#0" expanded="true" />
+            <element signature="e#912#913#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportAckMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -904,36 +906,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportDataMsg.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#694#695#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="243">
+          <caret line="21" column="24" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/datalink/DataLinkLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/transport/TransportLayerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="324">
+          <caret line="128" column="57" lean-forward="false" selection-start-line="128" selection-start-column="57" selection-end-line="128" selection-end-column="57" />
           <folding>
+            <element signature="method#sendMsg#0;class#TransportLayerImpl#0" expanded="false" />
             <element signature="method#splitMessage#0;class#TransportLayerImpl#0" expanded="false" />
             <element signature="method#getTimedOutMessages#0;class#TransportLayerImpl#0" expanded="false" />
-            <element signature="method#sendMsg#1;class#TransportLayerImpl#0" expanded="false" />
             <element signature="method#removeMsgFromSentMsgs#0;class#TransportLayerImpl#0" expanded="false" />
+            <element signature="e#5446#5447#0" expanded="true" />
+            <element signature="e#5508#5509#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/krishnakandula/network/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
