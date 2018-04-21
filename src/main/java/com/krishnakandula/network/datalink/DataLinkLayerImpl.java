@@ -89,7 +89,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         });
     }
 
-    void sendData(DataFrame dataFrame, int neighborId) {
+    void sendData(DataFrame dataFrame, byte neighborId) {
         Integer clearChannel = channels.get(neighborId).getClearLogicalChannel();
         if (clearChannel != null) {
             dataFrame.channelNumber = clearChannel;

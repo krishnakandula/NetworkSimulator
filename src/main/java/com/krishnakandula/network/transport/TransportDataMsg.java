@@ -26,7 +26,7 @@ class TransportDataMsg extends TransportMsg {
 
     @Override
     byte getLength() {
-        return (byte) (5 + data.length());
+        return (byte) (5 + data.length() - 1);          // Subtract 1 because it's in the description of the project
     }
 
     static TransportDataMsg from(String msg, short maxMsgSize) {
@@ -41,5 +41,10 @@ class TransportDataMsg extends TransportMsg {
                 Short.parseShort(matcher.group(3)), // sequenceNum
                 matcher.group(4),                   // data
                 maxMsgSize);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%c %d %d %d %s", msgType, sourceId, destinationId, sequenceNum, data);
     }
 }

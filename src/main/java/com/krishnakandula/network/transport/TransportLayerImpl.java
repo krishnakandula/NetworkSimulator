@@ -42,15 +42,17 @@ public class TransportLayerImpl implements TransportLayer {
         });
 
         // Split msg up and add to queue
-        splitMessage(node.msg, maxMsgSize).forEach(splitMsg -> {
-            TransportDataMsg dataMsg = new TransportDataMsg(
-                    node.id,
-                    node.destination,
-                    sequenceNum++,
-                    splitMsg,
-                    maxMsgSize);
-            msgQueues.get(node.destination).offer(dataMsg);
-        });
+        if (node.msg != null) {
+            splitMessage(node.msg, maxMsgSize).forEach(splitMsg -> {
+                TransportDataMsg dataMsg = new TransportDataMsg(
+                        node.id,
+                        node.destination,
+                        sequenceNum++,
+                        splitMsg,
+                        maxMsgSize);
+                msgQueues.get(node.destination).offer(dataMsg);
+            });
+        }
     }
 
     @Override
@@ -121,10 +123,11 @@ public class TransportLayerImpl implements TransportLayer {
 
     private List<String> splitMessage(String msg, int maxMsgSize) {
         List<String> splitMsgs = new ArrayList<>();
-        for (int i = 0; i < msg.length(); i++) {
+        for (int i = 0; i < msg.length();) {
             StringBuilder splitMsg = new StringBuilder();
-            for (int x = i; x < Math.min(i + maxMsgSize, msg.length()); x++) {
-                splitMsg.append(msg.charAt(i));
+            int maxSize = i + maxMsgSize;
+            while (i < Math.min(maxSize, msg.length())) {
+                splitMsg.append(msg.charAt(i++));
             }
             splitMsgs.add(splitMsg.toString());
         }

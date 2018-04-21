@@ -57,9 +57,11 @@ public class DataFrame {
             }
             escapedMsg.append(currentChar);
         }
-        return String.format("Fdata %d %d %sE",
+
+        String formattedMsg = String.format("Fdata %d %d %sE",
                 channelNumber,
                 seqNo,
                 escapedMsg.toString());
+        return formattedMsg;
     }
 }

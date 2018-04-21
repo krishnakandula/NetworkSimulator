@@ -14,8 +14,8 @@ class TransportAckMsg extends TransportMsg {
 
     @Override
     byte getLength() {
-        return 5;
-    }
+        return 5 - 1;
+    }       // Subtract 1 because it's in the description of the project
 
     static TransportAckMsg from(String msg) {
         String regex = "a (\\d) (\\d) (\\d+)$";
@@ -27,5 +27,10 @@ class TransportAckMsg extends TransportMsg {
                 Byte.parseByte(matcher.group(1)),       // sourceId
                 Byte.parseByte(matcher.group(2)),       // destinationId
                 Short.parseShort(matcher.group(3)));    // sequenceNum
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%c %d %d %d", msgType, sourceId, destinationId, sequenceNum);
     }
 }
