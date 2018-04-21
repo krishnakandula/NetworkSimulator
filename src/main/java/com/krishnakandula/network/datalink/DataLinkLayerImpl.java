@@ -1,11 +1,13 @@
 package com.krishnakandula.network.datalink;
 
 import com.krishnakandula.network.Node;
+import com.krishnakandula.network.util.Pair;
 import com.krishnakandula.network.util.Reader;
 import com.krishnakandula.network.util.Writer;
 import com.krishnakandula.network.network.NetworkLayer;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Krishna Chaitanya Kandula on 4/15/2018.
@@ -17,6 +19,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     private Map<Byte, Reader> readers;
     private Map<Byte, String> msgs;                  // NeighborId -> Msg
     private Map<Byte, Channel> channels;             // NeighborId -> Channel
+    private Map<Byte, List<Pair<Integer, DataFrame>>> sentMsgs;
     private int seqNo = 0;
     private int time;
     private int timeout;
@@ -26,7 +29,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         this.timeout = timeout;
 
         // Init msgs with empty strings
-        msgs = new HashMap<Byte, String>();
+        msgs = new HashMap<>();
         node.neighbors.forEach(neighbor -> msgs.put(neighbor, ""));
 
         // Init readers
@@ -36,6 +39,9 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         // Init channels
         this.channels = new HashMap<>();
         node.neighbors.forEach(neighbor -> channels.put(neighbor, new Channel(numChannels)));
+
+        this.sentMsgs = new HashMap<>();
+        node.neighbors.forEach(neighbor -> sentMsgs.put(neighbor, new ArrayList<>()));
     }
 
     @Override
@@ -57,7 +63,8 @@ public class DataLinkLayerImpl implements DataLinkLayer {
                         DataAck ack = DataAck.from(frame);
                         Channel channel = channels.get(neighbor);
                         channel.clearLogicalChannel(ack.seqNo);
-                        System.out.println(String.format("Received ack: %s from neighbor %d", ack, neighbor));
+                        removeFrameFromSentFrames(ack.seqNo, neighbor, sentMsgs);
+                        System.out.println(String.format("DataLinkLayer: Received ack: %s from neighbor %d", ack, neighbor));
                     } else {
                         DataFrame dataFrame = DataFrame.from(frame);
                         sendAck(dataFrame, neighbor);
@@ -82,11 +89,13 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     }
 
     private void checkTimeouts() {
-        channels.forEach((neighborId, channel) -> {
-            List<DataFrame> timedOut = channel.getTimedOutFrames(time - timeout);
-            timedOut.forEach(dataFrame -> channel.clearLogicalChannel(dataFrame.seqNo));
-            timedOut.forEach(dataFrame -> sendData(dataFrame, neighborId));
-        });
+        int lastValidTime = time - timeout;
+        sentMsgs.forEach((neighbor, msgs) -> msgs.forEach(msg -> {
+            if (lastValidTime > msg.getKey()){
+                channels.get(neighbor).clearLogicalChannel(msg.getValue().seqNo);
+                sendData(msg.getValue(), neighbor);
+            }
+        }));
     }
 
     void sendData(DataFrame dataFrame, byte neighborId) {
@@ -94,7 +103,9 @@ public class DataLinkLayerImpl implements DataLinkLayer {
         if (clearChannel != null) {
             dataFrame.channelNumber = clearChannel;
             channels.get(neighborId).addToLogicalChannel(dataFrame);
-            System.out.println(String.format("Sending data: %s to %d", dataFrame, neighborId));
+            removeFrameFromSentFrames(dataFrame.seqNo, neighborId, sentMsgs);
+            sentMsgs.get(neighborId).add(new Pair<>(time, dataFrame));
+            System.out.println(String.format("DataLinkLayer: Sending data: %s to %d", dataFrame, neighborId));
             Writer.writeFile(getWriteFilePath(neighborId), dataFrame.toString());
         } else {
             // Drop the frame, transport layer will resend
@@ -104,8 +115,14 @@ public class DataLinkLayerImpl implements DataLinkLayer {
     private void sendAck(DataFrame dataFrame, int neighborId) {
         DataAck ack = new DataAck(dataFrame.seqNo);
         ack.channelNumber = dataFrame.channelNumber;
-        System.out.println(String.format("Sending ack: %s to %d", ack, neighborId));
+        System.out.println(String.format("DataLinkLayer: Sending ack: %s to %d", ack, neighborId));
         Writer.writeFile(getWriteFilePath(neighborId), ack.toString());
+    }
+
+    private void removeFrameFromSentFrames(int seqNo, byte destination, Map<Byte, List<Pair<Integer, DataFrame>>> sentFrames) {
+        sentFrames.put(destination, sentFrames.get(destination).stream()
+                .filter(timeDataPair -> seqNo != timeDataPair.getValue().seqNo)
+                .collect(Collectors.toList()));
     }
 
     private boolean isAcknowledgment(String frame) {

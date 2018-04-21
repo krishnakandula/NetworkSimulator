@@ -85,6 +85,7 @@ public class TransportLayerImpl implements TransportLayer {
                         .filter(nodeDataPair -> nodeDataPair.getValue().sequenceNum != ack.sequenceNum)
                         .collect(Collectors.toList()));
             }
+            System.out.println(String.format("TransportLayer: Received ack: %s", ack.toString()));
         } else {
             // Data msg
             TransportDataMsg data = TransportDataMsg.from(msg, maxMsgSize);
@@ -96,10 +97,13 @@ public class TransportLayerImpl implements TransportLayer {
             }
 
             receivedMsgs.get(data.sourceId).add(data);
+            System.out.println(String.format("TransportLayer: Received msg: %s", data.toString()));
 
             //Send ack
             TransportAckMsg ack = new TransportAckMsg(node.id, data.sourceId, sequenceNum++);
             networkLayer.receiveFromTransportLayer(ack.toString(), ack.getLength(), ack.destinationId);
+            System.out.println(String.format("TransportLayer: Sending ack: %s", ack.toString()));
+
         }
     }
 
@@ -165,6 +169,7 @@ public class TransportLayerImpl implements TransportLayer {
         removeMsgFromSentMsgs(destination, dataMsg.sequenceNum, sentMsgs);
         sentMsgs.get(destination).add(new Pair<>(currentTime, dataMsg));
         networkLayer.receiveFromTransportLayer(dataMsg.toString(), dataMsg.getLength(), dataMsg.destinationId);
+        System.out.println(String.format("TransportLayer: Sending data to network layer: %s", dataMsg.toString()));
     }
 
     private void removeMsgFromSentMsgs(byte destination,
