@@ -29,6 +29,7 @@ public class Main {
         transportLayer.provideNetworkLayer(networkLayer);
 
         for (int time = 0; time < node.lifeTime; time++) {
+            System.out.println(String.format("Time: %d", time));
             //Update times
             dataLinkLayer.setTime(time);
             transportLayer.setTime(time);

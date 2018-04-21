@@ -31,6 +31,7 @@ public class TransportLayerImpl implements TransportLayer {
         networkNodes = new HashSet<>();
         msgQueues = new HashMap<>();
         sentMsgs = new HashMap<>();
+        receivedMsgs = new HashMap<>();
 
         node.neighbors.stream()
                 .filter(neighborId -> neighborId != node.id)
@@ -39,6 +40,7 @@ public class TransportLayerImpl implements TransportLayer {
         networkNodes.forEach(nodeId -> {
             msgQueues.put(nodeId, new LinkedList<>());
             sentMsgs.put(nodeId, new ArrayList<>());
+            receivedMsgs.put(nodeId, new ArrayList<>());
         });
 
         // Split msg up and add to queue
@@ -106,8 +108,9 @@ public class TransportLayerImpl implements TransportLayer {
         receivedMsgs.entrySet().stream()
                 .filter(nodeMsgsPair -> !nodeMsgsPair.getValue().isEmpty())
                 .forEach(nodeMsgsPair -> {
-                    nodeMsgsPair.getValue()
-                            .forEach(msg -> Writer.writeFile(getOutputFilePath(nodeMsgsPair.getKey()), msg.toString()));
+                    StringBuilder msg = new StringBuilder();
+                    nodeMsgsPair.getValue().forEach(splitMsg -> msg.append(splitMsg.data));
+                    Writer.writeFile(getOutputFilePath(nodeMsgsPair.getKey()), msg.toString());
                 });
     }
 

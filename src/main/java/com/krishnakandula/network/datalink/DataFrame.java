@@ -36,7 +36,7 @@ public class DataFrame {
         StringBuilder unstuffedMsg = new StringBuilder();
         for (int i = 0; i < msg.length(); i++) {
             char currentChar = msg.charAt(i);
-            if (currentChar == 'X' && i < msg.length() - 2) {
+            if (currentChar == 'X' && i < msg.length() - 1) {
                 unstuffedMsg.append(msg.charAt(i + 1));
                 i++;
             } else {

@@ -13,8 +13,9 @@ class TransportDataMsg extends TransportMsg {
                      String data,
                      short maxMsgSize) {
 
-        if (data != null && data.length() > maxMsgSize)
+        if (data != null && data.length() > maxMsgSize) {
             throw new IllegalArgumentException(String.format("Data can only be up to %d chars long", maxMsgSize));
+        }
 
         this.msgType = 'd';
         this.sourceId = sourceId;
