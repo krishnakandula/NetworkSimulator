@@ -37,6 +37,7 @@ public class TransportLayerImpl implements TransportLayer {
                 .filter(neighborId -> neighborId != node.id)
                 .forEach(neighborId -> networkNodes.add(neighborId));
 
+        networkNodes.add(node.destination);
         networkNodes.forEach(nodeId -> {
             msgQueues.put(nodeId, new LinkedList<>());
             sentMsgs.put(nodeId, new ArrayList<>());

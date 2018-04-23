@@ -27,7 +27,11 @@ public class NetworkLayerImpl implements NetworkLayer {
 
     @Override
     public void receiveFromDataLinkLayer(String msg) {
+        System.out.println(String.format("NetworkLayer: Received msg %s from data link layer", msg));
         NetworkMsg networkMsg = NetworkMsg.fromNetworkMsgString(msg);
+        if (!greatestReceivedMsgs.containsKey(networkMsg.sourceId)) {
+            greatestReceivedMsgs.put(networkMsg.sourceId, Short.MIN_VALUE);
+        }
         if (networkMsg.messageId > greatestReceivedMsgs.get(networkMsg.sourceId)) {
             greatestReceivedMsgs.put(networkMsg.sourceId, networkMsg.messageId);
 
@@ -43,7 +47,8 @@ public class NetworkLayerImpl implements NetworkLayer {
     @Override
     public void receiveFromTransportLayer(String msg, byte length, byte destination) {
         NetworkMsg networkMsg = new NetworkMsg(node.id, destination, ++msgId, length, msg);
-        dataLinkLayer.receiveFromNetwork(networkMsg.toString(), destination);
+        // Flood network
+        node.neighbors.forEach(neighborId -> dataLinkLayer.receiveFromNetwork(networkMsg.toString(), neighborId));
     }
 
     @Override

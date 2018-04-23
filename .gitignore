@@ -16,3 +16,5 @@ hs_err_pid*
 test
 
 \.DS_Store
+
+node0received

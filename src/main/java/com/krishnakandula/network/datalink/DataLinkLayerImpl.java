@@ -68,6 +68,7 @@ public class DataLinkLayerImpl implements DataLinkLayer {
                     } else {
                         DataFrame dataFrame = DataFrame.from(frame);
                         sendAck(dataFrame, neighbor);
+                        System.out.println(String.format("DataLinkLayer: Received data: %s from neighbor %d", dataFrame, neighbor));
                         networkLayer.receiveFromDataLinkLayer(dataFrame.networkLayerMessage);
                     }
                 });

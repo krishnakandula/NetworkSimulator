@@ -30,11 +30,11 @@ public class NetworkMsg {
 
         byte sourceId = Byte.parseByte(matcher.group(1));
         byte destinationId = Byte.parseByte(matcher.group(2));
-        short messaegid = Short.parseShort(matcher.group(3));
+        short messageId = Short.parseShort(matcher.group(3));
         byte length = Byte.parseByte(matcher.group(4));
         String transportMsg = matcher.group(5);
 
-        return new NetworkMsg(sourceId, destinationId, messaegid, length, transportMsg);
+        return new NetworkMsg(sourceId, destinationId, messageId, length, transportMsg);
     }
 
     @Override
