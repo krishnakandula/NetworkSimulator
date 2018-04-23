@@ -56,7 +56,8 @@ public class Main {
 
         if (args.length > 3) {
             int neighbor = 3;
-            if (args[3].charAt(0) == '"') {
+            if (node.id != node.destination) {
+                // args[3] is msg, all other fields are neighbors
                 node.msg = args[3];
                 neighbor++;
             }
