@@ -110,12 +110,13 @@ public class TransportLayerImpl implements TransportLayer {
 
     @Override
     public void outputAllReceived() {
+        String outputPath = getOutputFilePath(node.id);
         receivedMsgs.entrySet().stream()
                 .filter(nodeMsgsPair -> !nodeMsgsPair.getValue().isEmpty())
                 .forEach(nodeMsgsPair -> {
                     StringBuilder msg = new StringBuilder();
                     nodeMsgsPair.getValue().forEach(splitMsg -> msg.append(splitMsg.data));
-                    Writer.writeFile(getOutputFilePath(nodeMsgsPair.getKey()), msg.toString());
+                    Writer.writeFile(outputPath, msg.toString());
                 });
     }
 
