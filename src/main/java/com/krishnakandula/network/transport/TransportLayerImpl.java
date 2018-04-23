@@ -101,7 +101,7 @@ public class TransportLayerImpl implements TransportLayer {
             System.out.println(String.format("TransportLayer: Received msg: %s", data.toString()));
 
             //Send ack
-            TransportAckMsg ack = new TransportAckMsg(node.id, data.sourceId, sequenceNum++);
+            TransportAckMsg ack = new TransportAckMsg(node.id, data.sourceId, data.sequenceNum);
             networkLayer.receiveFromTransportLayer(ack.toString(), ack.getLength(), ack.destinationId);
             System.out.println(String.format("TransportLayer: Sending ack: %s", ack.toString()));
 
